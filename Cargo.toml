@@ -1,0 +1,9 @@
+[package]
+name = "snake"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clearscreen = "3.0.0"
+k_board = "1.2.4"
+rand = "0.8.5"
