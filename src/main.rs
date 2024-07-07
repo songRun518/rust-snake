@@ -5,15 +5,18 @@ mod screen;
 mod update;
 
 use after_move::{die, eat};
-use data::{Direction, BLANK, COLUMN, FOOD, ROW, SNAKE};
+use data::{Direction, BLANK, COLUMN, FOOD, FPS, ROW, SNAKE};
+use device_query::DeviceState;
 use move_snake::movement;
 use screen::fresh_screen;
 use update::{input_key, update_pos};
 
 use rand::Rng;
-use std::collections::HashMap;
+use std::{collections::HashMap, time::Instant};
 
 fn main() {
+    let keyboard = DeviceState::new();
+    let mut timer = Instant::now();
     let mut rng = rand::thread_rng();
     let mut food = (rng.gen_range(0..ROW), rng.gen_range(0..COLUMN));
     let mut record_path: HashMap<(usize, usize), Direction> = HashMap::new();
@@ -30,17 +33,21 @@ fn main() {
 
     fresh_screen(&stage);
     loop {
-        input_key(&body, &mut record_path);
-        update_pos(&mut body, &mut record_path);
-        movement(&mut body, &mut stage);
-        eat(&mut rng, &mut food, &mut body, &mut stage);
+        if timer.elapsed().as_secs_f64() > FPS {
+            timer = Instant::now();
 
-        fresh_screen(&stage);
-        println!("{}", body.len());
+            input_key(&keyboard, &body, &mut record_path);
+            update_pos(&mut body, &mut record_path);
+            movement(&mut body, &mut stage);
+            eat(&mut rng, &mut food, &mut body, &mut stage);
 
-        if die(&body) {
-            println!("You die");
-            break;
+            fresh_screen(&stage);
+            println!("{}", body.len());
+
+            if die(&body) {
+                println!("You die");
+                break;
+            }
         }
     }
 }

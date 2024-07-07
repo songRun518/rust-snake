@@ -1,16 +1,18 @@
+use device_query::{DeviceQuery, DeviceState, Keycode};
+
 use crate::Direction;
-use k_board::{keyboard, keys::Keys};
 use std::collections::HashMap;
 
 pub fn input_key(
+    keyboard: &DeviceState,
     body: &[((usize, usize), Direction)],
     record: &mut HashMap<(usize, usize), Direction>,
 ) {
-    let dir = match keyboard::get_key_from_keyboard() {
-        Keys::Up => Some(Direction::Up),
-        Keys::Down => Some(Direction::Down),
-        Keys::Left => Some(Direction::Left),
-        Keys::Right => Some(Direction::Right),
+    let dir = match keyboard.get_keys().first() {
+        Some(Keycode::Up) => Some(Direction::Up),
+        Some(Keycode::Down) => Some(Direction::Down),
+        Some(Keycode::Left) => Some(Direction::Left),
+        Some(Keycode::Right) => Some(Direction::Right),
         _ => None,
     };
     if let Some(dir) = dir {

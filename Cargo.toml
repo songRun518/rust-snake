@@ -5,5 +5,5 @@ edition = "2021"
 
 [dependencies]
 clearscreen = "3.0.0"
-k_board = "1.2.4"
+device_query = "2.1.0"
 rand = "0.8.5"
