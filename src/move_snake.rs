@@ -1,6 +1,6 @@
 use crate::{Direction, BLANK, SNAKE, ROW, COLUMN};
 
-pub fn movement(body: &mut Vec<((usize, usize), Direction)>, stage: &mut [[char; 100]; 30]) {
+pub fn movement(body: &mut Vec<((usize, usize), Direction)>, stage: &mut [[char; COLUMN]; ROW]) {
     for ((row, column), dir) in body.iter_mut() {
         stage[*row][*column] = BLANK;
         safe_move(row, column, &dir);

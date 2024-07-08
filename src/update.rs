@@ -4,6 +4,7 @@ use crate::Direction;
 use std::collections::HashMap;
 
 pub fn input_key(
+    end: &mut bool,
     keyboard: &DeviceState,
     body: &[((usize, usize), Direction)],
     record: &mut HashMap<(usize, usize), Direction>,
@@ -13,10 +14,14 @@ pub fn input_key(
         Some(Keycode::Down) => Some(Direction::Down),
         Some(Keycode::Left) => Some(Direction::Left),
         Some(Keycode::Right) => Some(Direction::Right),
+        Some(Keycode::E) => {
+            *end = true;
+            None
+        }
         _ => None,
     };
     if let Some(dir) = dir {
-        record.insert(body.first().unwrap().0, dir);
+        record.entry(body[0].0).or_insert(dir);
     }
 }
 

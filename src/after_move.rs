@@ -24,7 +24,7 @@ pub fn eat(
     rng: &mut ThreadRng,
     food: &mut (usize, usize),
     body: &mut Vec<((usize, usize), Direction)>,
-    stage: &mut [[char; 100]; 30],
+    stage: &mut [[char; COLUMN]; ROW],
 ) {
     if stage[food.0][food.1] != FOOD {
         *food = (rng.gen_range(0..ROW), rng.gen_range(0..COLUMN));

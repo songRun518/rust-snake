@@ -26,5 +26,5 @@ pub const FOOD: char = '@';
 pub const SNAKE: char = '*';
 pub const BLANK: char = ' ';
 pub const ROW: usize = 30;
-pub const COLUMN: usize = 100;
+pub const COLUMN: usize = 30;
 pub const FPS: f64 = 0.1;
