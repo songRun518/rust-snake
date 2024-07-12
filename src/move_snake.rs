@@ -1,4 +1,4 @@
-use crate::{Direction, BLANK, SNAKE, ROW, COLUMN};
+use crate::data::{Direction, BLANK, COLUMN, ROW, SNAKE};
 
 pub fn movement(body: &mut Vec<((usize, usize), Direction)>, stage: &mut [[char; COLUMN]; ROW]) {
     for ((row, column), dir) in body.iter_mut() {

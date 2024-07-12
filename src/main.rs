@@ -1,20 +1,17 @@
-mod after_move;
-mod data;
-mod move_snake;
-mod screen;
-mod update;
-
-use after_move::{die, eat};
-use data::{Direction, BLANK, COLUMN, FOOD, FPS, ROW, SNAKE};
-use device_query::DeviceState;
-use move_snake::movement;
-use screen::fresh_screen;
-use update::{input_key, update_pos};
-
-use rand::Rng;
+use std::io::{self, BufWriter, Write};
 use std::{collections::HashMap, time::Instant};
 
+use device_query::DeviceState;
+use rand::Rng;
+
+use snake_cli::after_move::{die, eat};
+use snake_cli::data::{Direction, BLANK, COLUMN, FOOD, FPS, ROW, SNAKE};
+use snake_cli::move_snake::movement;
+use snake_cli::screen::fresh_screen;
+use snake_cli::update::{input_key, update_pos};
+
 fn main() {
+    let mut handle: BufWriter<io::StdoutLock<'_>> = BufWriter::new(io::stdout().lock());
     let mut end = false;
     let mut timer = Instant::now();
     let mut rng = rand::thread_rng();
@@ -31,7 +28,7 @@ fn main() {
         stage[*row][*column] = SNAKE;
     }
 
-    fresh_screen(&stage);
+    fresh_screen(&mut handle, &stage);
     loop {
         input_key(&mut end, &DeviceState::new(), &body, &mut record_path);
         if end {
@@ -46,8 +43,9 @@ fn main() {
             movement(&mut body, &mut stage);
             eat(&mut rng, &mut food, &mut body, &mut stage);
 
-            fresh_screen(&stage);
-            println!("得分: {}", body.len() - 4);
+            fresh_screen(&mut handle, &stage);
+            writeln!(handle, "得分: {}", body.len() - 4).unwrap();
+            handle.flush().unwrap();
 
             if die(&body) {
                 println!("你死了");
@@ -55,7 +53,8 @@ fn main() {
             }
         }
     }
-
+    
+    drop(handle);
     println!("\nPress \"Enter\" to continue......");
     match std::io::stdin().read_line(&mut String::new()) {
         Ok(_) => {}

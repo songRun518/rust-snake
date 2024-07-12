@@ -1,4 +1,7 @@
-use crate::{move_snake::safe_move, Direction, COLUMN, FOOD, ROW, SNAKE};
+use crate::{
+    data::{Direction, COLUMN, FOOD, ROW, SNAKE},
+    move_snake::safe_move,
+};
 use rand::{rngs::ThreadRng, Rng};
 use std::collections::HashMap;
 

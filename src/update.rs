@@ -1,6 +1,6 @@
 use device_query::{DeviceQuery, DeviceState, Keycode};
 
-use crate::Direction;
+use crate::data::Direction;
 use std::collections::HashMap;
 
 pub fn input_key(

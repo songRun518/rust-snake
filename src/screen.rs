@@ -1,15 +1,21 @@
-use crate::{COLUMN, ROW};
+use std::io::{self, BufWriter, Write};
 
-pub fn fresh_screen(stage: &[[char; COLUMN]; ROW]) {
+use crate::data::{COLUMN, ROW};
+
+pub fn fresh_screen(handle: &mut BufWriter<io::StdoutLock<'_>>, stage: &[[char; COLUMN]; ROW]) {
     clearscreen::clear().unwrap();
-    println!("{}", "-".repeat(COLUMN + 2));
+    writeln!(handle, "{}", "-".repeat(COLUMN + 2)).unwrap();
     for row in stage {
-        print!("|");
+        write!(handle, "|").unwrap();
         for column in row {
-            print!("{}", column);
+            write!(handle, "{}", column).unwrap();
         }
-        println!("|");
+        writeln!(handle, "|").unwrap();
     }
-    println!("{}", "-".repeat(COLUMN + 2));
-    println!("按 \"Up\" \"Down\" \"Left\" \"Right\" 控制, 按 \"E\" 结束");
+    writeln!(handle, "{}", "-".repeat(COLUMN + 2)).unwrap();
+    writeln!(
+        handle,
+        "按 \"Up\" \"Doswn\" \"Left\" \"Right\" 控制, 按 \"E\" 结束"
+    )
+    .unwrap();
 }
