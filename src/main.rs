@@ -11,7 +11,7 @@ use snake_cli::screen::fresh_screen;
 use snake_cli::update::{input_key, update_pos};
 
 fn main() {
-    let mut handle: BufWriter<io::StdoutLock<'_>> = BufWriter::new(io::stdout().lock());
+    let mut handle = BufWriter::new(io::stdout().lock());
     let mut end = false;
     let mut timer = Instant::now();
     let mut rng = rand::thread_rng();
@@ -53,7 +53,7 @@ fn main() {
             }
         }
     }
-    
+
     drop(handle);
     println!("\nPress \"Enter\" to continue......");
     match std::io::stdin().read_line(&mut String::new()) {
