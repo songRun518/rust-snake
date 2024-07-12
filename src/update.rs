@@ -11,11 +11,11 @@ pub fn input_key(
     end_state: &mut EndState,
 ) {
     let dir = match keyboard.get_keys().first() {
-        Some(Keycode::Up) => Some(Direction::Up),
-        Some(Keycode::Down) => Some(Direction::Down),
-        Some(Keycode::Left) => Some(Direction::Left),
-        Some(Keycode::Right) => Some(Direction::Right),
-        Some(Keycode::E) => {
+        Some(Keycode::W) => Some(Direction::Up),
+        Some(Keycode::S) => Some(Direction::Down),
+        Some(Keycode::A) => Some(Direction::Left),
+        Some(Keycode::D) => Some(Direction::Right),
+        Some(Keycode::Escape) => {
             *whether_end = true;
             *end_state = EndState::Manual;
             None

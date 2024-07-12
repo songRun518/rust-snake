@@ -15,7 +15,7 @@ pub fn fresh_screen(handle: &mut BufWriter<io::StdoutLock<'_>>, stage: &[[char; 
     writeln!(handle, "{}", "-".repeat(COLUMN + 2)).unwrap();
     writeln!(
         handle,
-        "按 \"Up\" \"Doswn\" \"Left\" \"Right\" 控制, 按 \"E\" 结束"
+        "按 \"W\" \"A\" \"S\" \"D\" 控制, 按 \"ESC\" 结束"
     )
     .unwrap();
 }
