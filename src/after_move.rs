@@ -1,12 +1,11 @@
 use crate::{
-    data::{Direction, COLUMN, FOOD, ROW, SNAKE},
+    data::{Direction, EndState, COLUMN, FOOD, ROW, SNAKE},
     move_snake::safe_move,
 };
 use rand::{rngs::ThreadRng, Rng};
 use std::collections::HashMap;
 
-pub fn die(body: &[((usize, usize), Direction)]) -> bool {
-    let mut die = false;
+pub fn die(body: &[((usize, usize), Direction)], whether_end: &mut bool, end_state: &mut EndState) {
     let mut record_body: HashMap<(usize, usize), usize> = HashMap::new();
     for (pos, _) in body {
         record_body
@@ -16,11 +15,11 @@ pub fn die(body: &[((usize, usize), Direction)]) -> bool {
     }
     for val in record_body.values() {
         if *val > 1 {
-            die = true;
+            *whether_end = true;
+            *end_state = EndState::Die;
             break;
         }
     }
-    die
 }
 
 pub fn eat(

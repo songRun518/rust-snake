@@ -1,13 +1,14 @@
 use device_query::{DeviceQuery, DeviceState, Keycode};
 
-use crate::data::Direction;
+use crate::data::{Direction, EndState};
 use std::collections::HashMap;
 
 pub fn input_key(
-    end: &mut bool,
     keyboard: &DeviceState,
     body: &[((usize, usize), Direction)],
     record: &mut HashMap<(usize, usize), Direction>,
+    whether_end: &mut bool,
+    end_state: &mut EndState,
 ) {
     let dir = match keyboard.get_keys().first() {
         Some(Keycode::Up) => Some(Direction::Up),
@@ -15,7 +16,8 @@ pub fn input_key(
         Some(Keycode::Left) => Some(Direction::Left),
         Some(Keycode::Right) => Some(Direction::Right),
         Some(Keycode::E) => {
-            *end = true;
+            *whether_end = true;
+            *end_state = EndState::Manual;
             None
         }
         _ => None,
