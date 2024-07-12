@@ -1,3 +1,10 @@
+pub const FOOD: char = '@';
+pub const SNAKE: char = '*';
+pub const BLANK: char = ' ';
+pub const ROW: usize = 30;
+pub const COLUMN: usize = 30;
+pub const FPS: f64 = 1.0 / 60.0 * 5.0;
+
 pub enum EndState {
     Die,
     Manual,
@@ -27,10 +34,3 @@ impl Direction {
         }
     }
 }
-
-pub const FOOD: char = '@';
-pub const SNAKE: char = '*';
-pub const BLANK: char = ' ';
-pub const ROW: usize = 30;
-pub const COLUMN: usize = 30;
-pub const FPS: f64 = 1.0 / 60.0 * 5.0;
