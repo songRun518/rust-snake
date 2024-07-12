@@ -47,7 +47,7 @@ fn main() {
             break 'game_loop;
         }
 
-        if timer.elapsed().as_secs_f64() > FPS {
+        if timer.elapsed().as_secs_f64().ge(&FPS) {
             timer = Instant::now();
 
             update_pos(&mut body, &mut record_path);
