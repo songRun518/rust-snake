@@ -16,7 +16,6 @@ use std::{collections::HashMap, time::Instant};
 
 fn main() {
     let mut end = false;
-    let keyboard = DeviceState::new();
     let mut timer = Instant::now();
     let mut rng = rand::thread_rng();
     let mut food = (rng.gen_range(0..ROW), rng.gen_range(0..COLUMN));
@@ -34,9 +33,9 @@ fn main() {
 
     fresh_screen(&stage);
     loop {
-        input_key(&mut end, &keyboard, &body, &mut record_path);
+        input_key(&mut end, &DeviceState::new(), &body, &mut record_path);
         if end {
-            println!("Game over");
+            println!("游戏结束");
             break;
         }
 
@@ -48,10 +47,10 @@ fn main() {
             eat(&mut rng, &mut food, &mut body, &mut stage);
 
             fresh_screen(&stage);
-            println!("Socre: {}", body.len() - 4);
+            println!("得分: {}", body.len() - 4);
 
             if die(&body) {
-                println!("You die");
+                println!("你死了");
                 break;
             }
         }

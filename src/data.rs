@@ -27,4 +27,4 @@ pub const SNAKE: char = '*';
 pub const BLANK: char = ' ';
 pub const ROW: usize = 30;
 pub const COLUMN: usize = 30;
-pub const FPS: f64 = 0.1;
+pub const FPS: f64 = 1.0 / 60.0 * 5.0;

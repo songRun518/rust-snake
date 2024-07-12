@@ -11,5 +11,5 @@ pub fn fresh_screen(stage: &[[char; COLUMN]; ROW]) {
         println!("|");
     }
     println!("{}", "-".repeat(COLUMN + 2));
-    println!("Use \"Up\" \"Down\" \"Left\" \"Right\" to control, Press \"E\" to end");
+    println!("按 \"Up\" \"Down\" \"Left\" \"Right\" 控制, 按 \"E\" 结束");
 }
