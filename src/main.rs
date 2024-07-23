@@ -21,7 +21,7 @@ fn main() {
     let mut stage = [[BLANK; COLUMN]; ROW];
     let mut body: Vec<((usize, usize), Direction)> = vec![(15, 4), (15, 3), (15, 2), (15, 1)]
         .into_iter()
-        .zip([Direction::Right; 4].into_iter())
+        .zip([Direction::Right; 4])
         .collect();
 
     stage[food.0][food.1] = FOOD;
@@ -63,8 +63,5 @@ fn main() {
 
     drop(handle);
     println!("\nPress \"Enter\" to continue......");
-    match std::io::stdin().read_line(&mut String::new()) {
-        Ok(_) => {}
-        Err(_) => {}
-    }
+    let _ = std::io::stdin().read_line(&mut String::new());
 }

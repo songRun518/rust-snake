@@ -21,16 +21,9 @@ pub enum Direction {
 
 impl Direction {
     pub fn inversely(&self, other: &Direction) -> bool {
-        if *self == Direction::Up && *other == Direction::Down {
-            true
-        } else if *self == Direction::Down && *other == Direction::Up {
-            true
-        } else if *self == Direction::Left && *other == Direction::Right {
-            true
-        } else if *self == Direction::Right && *other == Direction::Left {
-            true
-        } else {
-            false
-        }
+        *self == Direction::Up && *other == Direction::Down
+            || *self == Direction::Down && *other == Direction::Up
+            || *self == Direction::Left && *other == Direction::Right
+            || *self == Direction::Right && *other == Direction::Left
     }
 }
